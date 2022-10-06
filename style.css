@@ -15,6 +15,7 @@ background: linear-gradient(to right, #F27121, #E94057, #8A2387); /* W3C, IE 10+
   width: 50%;
   margin-top: 100px;
 }
+
 h2, #numberText
 {
   font-family:arial;
@@ -58,6 +59,10 @@ label
   overflow: hidden;
   transition: 1s all ease;
 }
+.labels
+{
+    text-align: center;
+}
 #calculate::before{
   background: #ff7675;
   content: "";
@@ -71,7 +76,8 @@ label
 #calculate::before{
   width: 100%;
   height: 0%;
-  transform: translate(-50%,-50%) rotate(45deg);
+  transform: translate(-50%,-50%) rotat
+  e(45deg);
 }
 #calculate:hover::before{
   height: 380%;
