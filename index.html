@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Вычисление корней</title>
+</head>
+<body>
+<div class="container">
+<h2>Square Root Calculator</h2>
+ 	
+ 	<label for="number">
+              Введите число:
+    </label>
+        <input type="number" id="number" />
+	<p></p>
+	<label for="fixed">
+	  Введите точность:
+	</label>
+		<input type="number" id="fixed" />
+
+<p id="numberText"></p>
+   <div class="buttonDiv">
+     
+<input type="Submit" id="calculate" value="Calculate" /> </div>
+</body>
+</html>
+<script type="text/javascript">
+	var number = document.getElementById("number"); //число, которое вводят
+	var result = document.getElementById("numberText"); //результат
+	var fixed = document.getElementById("fixed"); //точность, которую вводят
+
+
+
+function convert()
+{
+	if(fixed.value > 30) //если точность больше 30, то уменьшаем ее до 30 (т.е. максимальная точность: 30)
+	{
+		fixed.value = 30;
+	}
+
+	if (number.value < 0)
+  	{
+  	result.innerHTML = "Отрицательное число";
+  	}
+	  else
+	  {
+	  	var sqRoot = Math.sqrt(number.value);
+	  	result.innerHTML = sqRoot.toFixed(fixed.value);
+	  }
+  	
+}
+
+function createEventListener()
+{
+  var calcBtn = document.getElementById("calculate");
+  
+  if (calcBtn.addEventListener)
+  {
+    calcBtn.addEventListener("click", convert, false);
+  }
+  else if (calcBtn.attachEvent)
+  {
+    calcBtn.attachEvent("onclick", convert);
+  }
+}
+
+if (window.addEventListener)
+{
+  window.addEventListener("load", createEventListener, false);
+}
+else if (window.attachEvent)
+{
+  window.attachEvent("onload", createEventListener);
+}
+</script>
