@@ -8,12 +8,17 @@
 </head>
 <body>
 <div class="container">
-<h2>Square Root Calculator</h2>
+<h2>Вычисление корней</h2>
  	
+	<select name="num_or_complex" id="num_or_complex">
+	  <option value="1">Обычное число</option>
+	  <option value="2">Комплексное число</option>
+	</select>
+	<p></p>
  	<label for="number">
-              Введите число:
+      Введите число:
     </label>
-        <input type="number" id="number" />
+        <input  id="number" />
 	<p></p>
 	<label for="fixed">
 	  Введите точность:
@@ -23,55 +28,75 @@
 <p id="numberText"></p>
    <div class="buttonDiv">
      
-<input type="Submit" id="calculate" value="Calculate" /> </div>
+<input type="Submit" id="calculate" value="Вычислить" /> </div>
 </body>
 </html>
 <script type="text/javascript">
 	var number = document.getElementById("number"); //число, которое вводят
 	var result = document.getElementById("numberText"); //результат
 	var fixed = document.getElementById("fixed"); //точность, которую вводят
+	var choose = document.getElementById("num_or_complex"); //что выбал пользователь: обычное число или комплексное
 
-
-
-function convert()
-{
-	if(fixed.value > 30) //если точность больше 30, то уменьшаем ее до 30 (т.е. максимальная точность: 30)
+	function norm_number() //когда обычное число
 	{
-		fixed.value = 30;
+		if(fixed.value > 30) //если точность больше 30, то уменьшаем ее до 30 (т.е. максимальная точность: 30)
+		{
+			fixed.value = 30;
+		}
+
+		if (number.value < 0)
+	  	{
+	  		result.innerHTML = "Отрицательное число";
+	  	}
+		else
+		{
+		  	var sqRoot = Math.sqrt(number.value);
+		  	result.innerHTML = sqRoot.toFixed(fixed.value);
+		}
+
+
+	}
+	function complex_number() //когда комплексное число
+	{
+		
+		if(fixed.value > 30) //если точность больше 30, то уменьшаем ее до 30 (т.е. максимальная точность: 30)
+		{
+			fixed.value = 30;
+		}
+
+		
+	}
+	function convert() //проверяем, выбрано обычное число или комплексное
+	{
+		if(choose.value == "1")
+	  		norm_number();
+	  	else
+	  		complex_number();
+
+	  	if(result.innerHTML == "NaN")
+		  	result.innerHTML = "Неверный ввод";
 	}
 
-	if (number.value < 0)
-  	{
-  	result.innerHTML = "Отрицательное число";
-  	}
-	  else
+	function createEventListener()
+	{
+	  var calcBtn = document.getElementById("calculate");
+	  
+	  if (calcBtn.addEventListener)
 	  {
-	  	var sqRoot = Math.sqrt(number.value);
-	  	result.innerHTML = sqRoot.toFixed(fixed.value);
+	    calcBtn.addEventListener("click", convert, false);
 	  }
-  	
-}
+	  else if (calcBtn.attachEvent)
+	  {
+	    calcBtn.attachEvent("onclick", convert);
+	  }
+	}
 
-function createEventListener()
-{
-  var calcBtn = document.getElementById("calculate");
-  
-  if (calcBtn.addEventListener)
-  {
-    calcBtn.addEventListener("click", convert, false);
-  }
-  else if (calcBtn.attachEvent)
-  {
-    calcBtn.attachEvent("onclick", convert);
-  }
-}
-
-if (window.addEventListener)
-{
-  window.addEventListener("load", createEventListener, false);
-}
-else if (window.attachEvent)
-{
-  window.attachEvent("onload", createEventListener);
-}
+	if (window.addEventListener)
+	{
+	  window.addEventListener("load", createEventListener, false);
+	}
+	else if (window.attachEvent)
+	{
+	  window.attachEvent("onload", createEventListener);
+	}
 </script>

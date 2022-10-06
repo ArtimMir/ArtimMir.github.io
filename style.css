@@ -32,7 +32,11 @@ h2, #numberText
   align-items: center;
   height: 100px;
 }
+#num_or_complex
+{
+  margin-left: 20px;
 
+}
 
 label
 {
