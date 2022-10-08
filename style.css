@@ -16,12 +16,12 @@ background: linear-gradient(to right, #F27121, #E94057, #8A2387); /* W3C, IE 10+
   margin-top: 100px;
 }
 
-h2, #numberText
+h2, #subx1
 {
   font-family:arial;
   text-align:center;
 }
-#numberText, #calculate, label, #fixed
+#subx1, #calculate, #fixed
 {
   font-family:arial;
 }
@@ -44,8 +44,8 @@ h2, #numberText
 }
 label
 {
-  margin-left: 20px;
-  font-weight:bold;
+  
+  
 }
 #calculate{
   background-color: #ff4d4d;

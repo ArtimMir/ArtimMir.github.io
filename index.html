@@ -5,105 +5,35 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<title>Вычисление корней</title>
+	<script src="script.js"></script>
 </head>
 <body>
 <div class="container">
 <h2>Вычисление корней</h2>
  	
 	<div class="select_num">
-	<select name="num_or_complex" id="num_or_complex">
+	<select name="num_or_complex" id="num_or_complex" onclick="complex_visibility()">
 	  <option value="1">Обычное число</option>
 	  <option value="2">Комплексное число</option>
 	</select>
 	</div>
 	<p></p>
 	<div class="labels">
- 	<label for="number">
-      Введите число:
-    </label>
-        <input  id="number" />
+ 	<label for="number">Введите число:</label>
+        <input  id="number" type="number" /> <!-- Поле ввода простого числа. разрешает вводить только числа и точку или запятую -->
+        <i><label id="plus" style="display: none">+</label></i>
+        <input id="complex" type="number" style="display: none"></input>  <!-- Поле ввода числа при i. разрешает вводить только числа и точку или запятую -->
+        <i><label id="i" style="display: none">i</label></i>
 	<p></p>
-	<label for="fixed">
-	  Введите точность:
-	</label>
-		<input type="number" id="fixed" />
+	<label for="fixed">Введите точность:</label>
+		<input id="precision" type="number" min="0" max="16" />
 	</div>
+	<center>
 
-<p id="numberText"></p>
-   <div class="buttonDiv">
-     
-<input type="Submit" id="calculate" value="Вычислить" /> </div>
+	<p ><i><label>x</label><sub id="subx1">1</sub><label> = </label><output id="x1" type="text"></output><label id="imaginarium1"></label></i></p>  <!-- Лейбл для вывода x1, а также для чистого x. В JS просто соответствующие теги обнуляются, если есть единственный корень, равный 0 -->
+    <p id="p_x1" style="display: none"><i><label id="xx2">x</label><sub id="subx2">2</sub><label id="=x2"> = </label><output id="x2" type="text"></output><label id="imaginarium2"></label></i></p>  <!-- Лейбл для вывода x2. Не выводит ничего, если только один корень. Остальное - аналогично -->
+    <!-- Варианты развития: занулить все лейблы до обработки скрипта -->
+	</center>
+   <div class="buttonDiv"><input  type="Submit" id="calculate" value="Вычислить" onclick="sqrt()" /> </div> <!--кнопка "вычислить"-->
 </body>
 </html>
-<script type="text/javascript">
-	var number = document.getElementById("number"); //число, которое вводят
-	var result = document.getElementById("numberText"); //результат
-	var fixed = document.getElementById("fixed"); //точность, которую вводят
-	var choose = document.getElementById("num_or_complex"); //что выбал пользователь: обычное число или комплексное
-
-	function norm_number() //когда обычное число
-	{
-		if(fixed.value > 30) //если точность больше 30, то уменьшаем ее до 30 (т.е. максимальная точность: 30)
-		{
-			fixed.value = 30;
-		}
-		if(fixed.value < 1) //если точность меньше 1, то уменьшаем ее до 1 (т.е. минимальная точность точность: 1)
-		{
-			fixed.value = 1;
-		}
-		if (number.value < 0)
-	  	{
-	  		result.innerHTML = "Отрицательное число";
-	  	}
-		else
-		{
-		  	var sqRoot = Math.sqrt(number.value);
-		  	result.innerHTML = sqRoot.toFixed(fixed.value);
-		}
-
-
-	}
-	function complex_number() //когда комплексное число
-	{
-		
-		if(fixed.value > 30) //если точность больше 30, то уменьшаем ее до 30 (т.е. максимальная точность: 30)
-		{
-			fixed.value = 30;
-		}
-
-		
-	}
-	function convert() //проверяем, выбрано обычное число или комплексное
-	{
-		if(choose.value == "1")
-	  		norm_number();
-	  	else
-	  		complex_number();
-
-	  	if(result.innerHTML == "NaN")
-		  	result.innerHTML = "Неверный ввод";
-	}
-
-	function createEventListener()
-	{
-	  var calcBtn = document.getElementById("calculate");
-	  
-	  if (calcBtn.addEventListener)
-	  {
-	    calcBtn.addEventListener("click", convert, false);
-	  }
-	  else if (calcBtn.attachEvent)
-	  {
-	    calcBtn.attachEvent("onclick", convert);
-	  }
-	}
-
-	if (window.addEventListener)
-	{
-	  window.addEventListener("load", createEventListener, false);
-	}
-	else if (window.attachEvent)
-	{
-	  window.attachEvent("onload", createEventListener);
-	}
-</script>
