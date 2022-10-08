@@ -15,9 +15,30 @@
 	<option class="es">ES</option>
 </select>
 </span>
+<a class="circle" href="#openModal">?</a>
+<a class="forum" href="#">Форум</a>
+<div id="openModal" class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Руководство пользователя</h3>
+        <a href="#close" title="" class="close">×</a>
+      </div>
+      <div class="modal-body">    
+        <p class="modal-title2">Руководство по использованию программы.</p>
+        <p class="first-p">1. Выберите режим "Обычное число" или "Комплексное число" в раскрывающемся списке после заголовка "Вычисление корней"</p>
+        <p class="two-p">2. Введите число, из которого хотите извлечь корень в поле с надписью "Введите число".</p>
+        <p class="two-p-dop">Если выбран режим "Комплексное число", дополнительно введите число перед i.</p>
+        <p class="three-p">3. Введите точность, с которой нужно вычислить квадратный корень этого числа в поле с надписью "Введите точность".</p>
+        <p class="four-p">4. Нажмите кнопку "Вычислить". Результат будет показан выше кнопки.</p>
+        <p class="lang-p"><br>Если Вы хотите изменить язык интерфейса, можно сделать это в левом верхнем углу.</p>
+        <p></p>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="container">
-<h2>Вычисление корней</h2>
- 	
+	<div class="header"><h2>Вычисление корней</h2> </div>
 	<div class="select_num">
 	<select name="num_or_complex" id="num_or_complex" onclick="complex_visibility()">
 	  <option value="1">Обычное число</option>
