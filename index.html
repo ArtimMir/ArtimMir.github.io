@@ -8,6 +8,13 @@
 	<script src="script.js"></script>
 </head>
 <body>
+<span class="custom-dropdown">
+<select id="change-lang">
+	<option class="ru">RU</option>
+	<option class="en">EN</option>
+	<option class="es">ES</option>
+</select>
+</span>
 <div class="container">
 <h2>Вычисление корней</h2>
  	
@@ -19,13 +26,13 @@
 	</div>
 	<p></p>
 	<div class="labels">
- 	<label for="number">Введите число:</label>
+ 	<label for="number" id="inp_number" >Введите число:</label>
         <input  id="number" type="number" /> <!-- Поле ввода простого числа. разрешает вводить только числа и точку или запятую -->
         <i><label id="plus" style="display: none">+</label></i>
         <input id="complex" type="number" style="display: none"></input>  <!-- Поле ввода числа при i. разрешает вводить только числа и точку или запятую -->
         <i><label id="i" style="display: none">i</label></i>
 	<p></p>
-	<label for="fixed">Введите точность:</label>
+	<label for="fixed"  id="inp_precision">Введите точность:</label>
 		<input id="precision" type="number" min="0" max="16" />
 	</div>
 	<center>
@@ -34,6 +41,7 @@
     <p id="p_x1" style="display: none"><i><label id="xx2">x</label><sub id="subx2">2</sub><label id="=x2"> = </label><output id="x2" type="text"></output><label id="imaginarium2"></label></i></p>  <!-- Лейбл для вывода x2. Не выводит ничего, если только один корень. Остальное - аналогично -->
     <!-- Варианты развития: занулить все лейблы до обработки скрипта -->
 	</center>
-   <div class="buttonDiv"><input  type="Submit" id="calculate" value="Вычислить" onclick="sqrt()" /> </div> <!--кнопка "вычислить"-->
+   <div class="buttonDiv"><button type="Submit" id="calculate" value="Вычислить" onclick="sqrt()">Вычислить</button></div> <!--кнопка "вычислить"-->
+<script src="lang.js"></script>
 </body>
 </html>
