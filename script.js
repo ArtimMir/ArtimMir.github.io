@@ -67,13 +67,13 @@ function sqrt() {
             document.getElementById("xx2").innerHTML = "";
             document.getElementById("subx2").innerHTML = "";
             document.getElementById("=x2").innerHTML = "";
-            document.getElementById('x1').innerHTML = 0;
+            document.getElementById('x1').innerHTML = Number(0).toFixed(precision);
           }
           else if (number > 0) {
             let sqrt = Math.sqrt(number);       // берёт корень введённого числа
             sqrt = Math.round(sqrt * Math.pow(10, precision)) / Math.pow(10, precision);        // округляет до заданной точности. если есть нули в конце - он не выводит
             let antsqrt = -sqrt;        // берёт второй корень
-            document.getElementById('x1').innerHTML = sqrt;        // выводит x1
+            document.getElementById('x1').innerHTML = sqrt.toFixed(precision);        // выводит x1
             //document.getElementById('x2').innerHTML = antsqrt;       // выводит x2
           }
           else {
@@ -81,7 +81,7 @@ function sqrt() {
             sqrt = Math.sqrt(sqrt);       // берёт корень введённого числа
             sqrt = Math.round(sqrt * Math.pow(10, precision)) / Math.pow(10, precision);        // округляет до заданной точности. если есть нули в конце - он не выводит
             let antsqrt = -sqrt;        // берёт второй корень
-            document.getElementById('x1').innerHTML = sqrt;        // выводит x1
+            document.getElementById('x1').innerHTML = sqrt.toFixed(precision);        // выводит x1
             //document.getElementById('x2').innerHTML = antsqrt;       // выводит x2
             document.getElementById('imaginarium1').innerHTML = "i";        // добавляет мнимую часть
             //document.getElementById('imaginarium2').innerHTML = "i";        // добавляет мнимую часть
