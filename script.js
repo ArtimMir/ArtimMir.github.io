@@ -92,51 +92,40 @@ function sqrt() {
           }
     }
     else {        // вычисление мнимой части. в большинстве случаев, сайт для проверки -  https://www.calc.ru/izvlecheniye-kornya-iz-kompleksnogo-chisla-onlayn.html
-      let r = Math.sqrt(Math.sqrt(Math.pow(number, 2) + Math.pow(complex, 2)));        // вычисление необходимого коэффициента
-      let φ;        // объявление угла фи
-      if (number > 0) {        // здесь и далее идёт проверка нескольких условий для вычисления мнимости угла. подробнее про эти условия можно узнать при вычислении мнимых корней на сайте https://mathdf.com/com/ru/
-        φ = Math.atan(complex/number);        // вычисление арктангенса
-        φ = φ * 180 / Math.PI;        // перевод из радиан в градусы
-      }
-      else if (number < 0 && complex >= 0) {
-        φ = Math.atan(complex/number);        // вычисление арктангенса
-        φ = φ * 180 / Math.PI + Math.PI;        // перевод из радиан в градусы
-      }
-      else if (number < 0 && complex < 0) {
-        φ = Math.atan(complex/number);        // вычисление арктангенса
-        φ = φ * 180 / Math.PI - Math.PI;        // перевод из радиан в градусы
-      }
-      else if (number == 0 && complex > 0) {        // здесь есть проблема: с сайтом "calc.ru ..." - для следующих двух случаев неправильно считает коэффициент при мнимой части. возможна ошибка со стороны сайта, т.к. там почему-то угол зануляется 
-        φ = Math.PI / 2;        // объявление угла в градусах
-      }
-      else if (number == 0 && complex < 0) {
-        φ = -Math.PI / 2;        // объявление угла в градусах
-      }
-      
-      let rcos1 = r * Math.cos(φ * Math.PI / 360);        // вычисление свободного члена для первого корня
-      let rsin1 = r * Math.sin(φ * Math.PI / 360);        // вычисление коэффициента при i для первого корня
-      
-      let rcos2 = r * Math.cos((φ + 2 * Math.PI) * Math.PI / 360);        // вычисление свободного члена для второго корня
-      let rsin2 = r * Math.sin((φ + 2 * Math.PI) * Math.PI / 360);        // вычисление коэффициента при i для второго корня
-      
-      rcos1 = Math.round(rcos1 * Math.pow(10, precision)) / Math.pow(10, precision);        // округляет свободный член первого корня до заданной точности. если есть нули в конце - он не выводит
-      rsin1 = Math.round(rsin1 * Math.pow(10, precision)) / Math.pow(10, precision);        // округляет коэффициент при i первого корня до заданной точности. если есть нули в конце - он не выводит
-      rcos2 = Math.round(rcos2 * Math.pow(10, precision)) / Math.pow(10, precision);        // округляет свободный член второго корня до заданной точности. если есть нули в конце - он не выводит
-      rsin2 = Math.round(rsin2 * Math.pow(10, precision)) / Math.pow(10, precision);        // округляет коэффициент при i второго корня до заданной точности. если есть нули в конце - он не выводит
-      
-      if (rsin1 < 0) {        // проверки для красивого вывода без повторений знаков типа "+ -"
-        document.getElementById('imaginarium1').innerHTML = rcos1 + " - " + Math.abs(rsin1) + "i";
-      }
-      else {
-        document.getElementById('imaginarium1').innerHTML = rcos1 + " + " + rsin1 + "i";
-      }
+      let D = Math.pow(number,2) + Math.pow(complex,2);        // дискриминант для решения корней. решается через систему относительно y, одинаковые приведённые действия опущены. подробнее: https://youtu.be/UoRBVPJJBU0?t=34
+    let x21 = (number + Math.sqrt(D)) / 2;        // первый квадрат корня
+    let x22 = (number - Math.sqrt(D)) / 2;        // второй квадрат корня
 
-      if (rsin2 < 0) {
-        document.getElementById('imaginarium2').innerHTML = rcos2 + " - " + Math.abs(rsin2) + "i";
-      }
-      else {
-        document.getElementById('imaginarium2').innerHTML = rcos2 + " + " + rsin2 + "i";
-      }
+    let x1;        // объявление первого свободного члена
+    if (x21 >= 0) {        // проверки на действительность квадрата корня. извлекает корень только из неотрицательного квадрата корня.
+      x1 = Math.sqrt(x21);
+    }
+    else {
+      x1 = Math.sqrt(x22);
+    }
+
+    let x2 = -x1;        // объявление второго свободного члена
+    let y1 = complex / (2 * x1);        // объявление первого коэффициента при i
+    let y2 = complex / (2 * x2);        // объявление второго коэффициента при i
+
+    x1 = Math.round(x1 * Math.pow(10, precision)) / Math.pow(10, precision);        // округляет свободный член первого корня до заданной точности. если есть нули в конце - он не выводит
+    y1 = Math.round(y1 * Math.pow(10, precision)) / Math.pow(10, precision);        // округляет коэффициент при i первого корня до заданной точности. если есть нули в конце - он не выводит
+    x2 = Math.round(x2 * Math.pow(10, precision)) / Math.pow(10, precision);        // округляет свободный член второго корня до заданной точности. если есть нули в конце - он не выводит
+    y2 = Math.round(y2 * Math.pow(10, precision)) / Math.pow(10, precision);        // округляет коэффициент при i второго корня до заданной точности. если есть нули в конце - он не выводит
+    
+    if (y1 < 0) {        // проверки для красивого вывода без повторений знаков типа "+ -"
+      document.getElementById('imaginarium1').innerHTML = x1 + " - " + Math.abs(y1) + "i";
+    }
+    else {
+      document.getElementById('imaginarium1').innerHTML = x1 + " + " + y1 + "i";
+    }
+
+    if (y2 < 0) {
+      document.getElementById('imaginarium2').innerHTML = x2 + " - " + Math.abs(y2) + "i";
+    }
+    else {
+      document.getElementById('imaginarium2').innerHTML = x2 + " + " + y2 + "i";
+    }
       
     }
   
