@@ -55,7 +55,7 @@ function sqrt() {
     let complex = Number(document.getElementById('complex').value);
     let precision = Number(document.getElementById('precision').value);
   
-    if (precision < 0 || precision > 16) {
+    if (precision < 1 || precision > 16) {
       // диапозон работает по переключению стрелочек. если ввод неверен - выводит ошибку
       alert("Введите корректную точность от 0 до 16!!");
     }
@@ -72,7 +72,7 @@ function sqrt() {
           else if (number > 0) {
             let sqrt = Math.sqrt(number);       // берёт корень введённого числа
             sqrt = Math.round(sqrt * Math.pow(10, precision)) / Math.pow(10, precision);        // округляет до заданной точности. если есть нули в конце - он не выводит
-            //let antsqrt = -sqrt;        // берёт второй корень
+            let antsqrt = -sqrt;        // берёт второй корень
             document.getElementById('x1').innerHTML = sqrt;        // выводит x1
             //document.getElementById('x2').innerHTML = antsqrt;       // выводит x2
           }
@@ -81,10 +81,11 @@ function sqrt() {
             sqrt = Math.sqrt(sqrt);       // берёт корень введённого числа
             sqrt = Math.round(sqrt * Math.pow(10, precision)) / Math.pow(10, precision);        // округляет до заданной точности. если есть нули в конце - он не выводит
             let antsqrt = -sqrt;        // берёт второй корень
-            document.getElementById('x1').innerHTML = antsqrt;        // выводит x1
-            document.getElementById('x2').innerHTML = sqrt;       // выводит x2
+            document.getElementById('x1').innerHTML = sqrt;        // выводит x1
+            //document.getElementById('x2').innerHTML = antsqrt;       // выводит x2
             document.getElementById('imaginarium1').innerHTML = "i";        // добавляет мнимую часть
-            document.getElementById('imaginarium2').innerHTML = "i";        // добавляет мнимую часть
+            //document.getElementById('imaginarium2').innerHTML = "i";        // добавляет мнимую часть
+            //p_x1.style.display = 'inline';
             /*для вывода со знаком умножения:
             document.getElementById('imaginarium1').innerHTML = "·i";
             document.getElementById('imaginarium2').innerHTML = "·i";*/
